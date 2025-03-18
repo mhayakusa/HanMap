@@ -2148,7 +2148,7 @@ layIniData[0].legend = [
 '#05FF00\t#C0EEBF\t#FFFFFF\tD.20%以上\tE.20%未満\tX.無',
 '#C0EEBF\t#FFFFFF\tE.20%未満\tX.無'
 ];
-layIniData[0].selectedInfoData = ['KEY\tSTR\t','旧国名\tCAT\t','領地\tCAT\t','領地2\tCAT\t'];
+layIniData[0].selectedInfoData = ['大正9年村名\tSTR\t','旧国名\tCAT\t','領地１\tCAT\t','領地２\tCAT\t'];
 layIniData[0].objData = [
   '関西.shp.485\t0\t1\t7\t53\t0\t4\t0\t0\t0\t0\t3\t5\t3\t5\t3\t5\t5\t3\t5\t5\t4\t5\t5\t5\t4\t5\t2\t5\t5\t3\t4\t4\t5\t5\t4\t4\t4\t5\t3\t4\t5\t4\t5\t3\t5\t5\t4\t3\t3\t3\t3\t5\t5\t5\t2\t2\t3\t4\t2\t5\t4\t5\t5\t5\t5\t5\t5\t0\t1\t3\t2\t1\t5\t2\t4\t1\t4\t3\t2\t4\t3\t1\t5\t2\t3\t1\t3\t5\t5\t4\t2\t1\t3\t2\t1\t2\t3\t2\t1\t3\t3\t5\t2\t1\t竹野郡下宇川村\t丹後国\tZ. 幕府・御三家\t',
   '関西.shp.486\t1\t1\t7\t53\t0\t4\t0\t0\t0\t0\t3\t5\t3\t5\t3\t5\t5\t3\t5\t5\t4\t5\t5\t5\t4\t5\t2\t5\t3\t3\t4\t4\t5\t5\t4\t4\t4\t5\t3\t4\t5\t4\t5\t3\t5\t5\t4\t3\t3\t3\t3\t5\t5\t5\t2\t2\t3\t4\t2\t5\t4\t5\t5\t5\t5\t5\t5\t2\t1\t3\t2\t1\t5\t2\t4\t1\t4\t3\t2\t4\t3\t1\t5\t2\t3\t1\t3\t5\t5\t4\t2\t1\t3\t2\t1\t2\t3\t2\t1\t3\t3\t5\t2\t1\t与謝郡本庄村\t丹後国\tZ. 幕府・御三家\tD.丹後国 宮津藩',

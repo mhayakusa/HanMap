@@ -19,6 +19,12 @@ def HanMap():
     return render_template('HanMap.html')
 #    return render_template('populationmap.html')
 
+@app.route('/Explanation.html')
+def Explanation():
+    session.permanent = True  
+    session["start"] = True 
+    return render_template('Explanation.html')
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
