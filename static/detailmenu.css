@@ -2,7 +2,7 @@ body {
     margin: 2;
     font-family: "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
     -webkit-text-size-adjust: none;
-    --hedder-height:60px;
+    --hedder-height:30px;
     --tablefontsize:11px;
     --hederZindex:100;
     --menuZindex:50;
@@ -75,12 +75,7 @@ header {
 	width: 150px;
 }   
 
-table {
-    text-align: center;
-    font-size:10px;
-    /*font-weight: bold;*/ 
-}
-   
+  
 table {
   text-align: center;
   table-layout:fixed; 
@@ -113,7 +108,8 @@ table td {
   cursor: pointer;
   font-size:12px;
   font-weight: bold;
-  width: 200px; 
+/*  width: 200px; */
+  height: 30px;
   padding-left: 10px;
   padding-right: 10px;
 /*  border-left: 1px solid gray;
@@ -122,7 +118,7 @@ table td {
   align-items: center;
 }
 .pmenu li{
-	border-bottom: 1px solid rgb(241, 41, 15);
+	border-bottom: 1px solid rgb(8, 70, 39);
 }
 .submenu {
   list-style: none;
@@ -130,7 +126,7 @@ table td {
   position: relative;
   display: block;
   z-index: 100;
-  width: 500px;
+  width: 450px;
   top: 0px;
   clear: both;
   align-items: center;
@@ -157,7 +153,7 @@ table td {
 }
 .pmenu:hover .submenu {
 /*	background-color: var(--back-color);   */
-  transition: all 0.3s;
+  transition: all 0.5s;
   visibility: visible;
 
 }
