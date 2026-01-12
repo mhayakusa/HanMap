@@ -86,7 +86,7 @@ header {
 	z-index:var(--tableZindex);
 	height: 100;
   position:sticky;
-  top:30px;  
+  top:0px;  
   /*top:100vh;
   position:relative;  
   flex-direction: column;
@@ -251,14 +251,14 @@ clear: both;*/
   width:60%;
   font-size:12px; 
   font-weight: bold;
-  margin: 10;
+  margin: 0;
   padding: 10px;
   border-spacing: 0;
 }
 .territoryTable th{
   z-index: var(--tableTHZindex);
   position: sticky;
-  top:80px;
+  top:50px;
   font-size:12px;
   padding: 0.2rem;
   margin: 0;
