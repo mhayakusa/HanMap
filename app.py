@@ -10,33 +10,24 @@ def main():
     session.permanent = True  
     session["start"] = True 
     return render_template('index.html')
-#    return render_template('populationmap.html')
+
 @app.route('/index.html')
 def index():
     session.permanent = True  
     session["start"] = True 
     return render_template('index.html')
-#    return render_template('populationmap.html')
-@app.route('/HanMap.html')
-def HanMap():
-    session.permanent = True  
-    session["start"] = True 
-    return render_template('HanMap.html')
-#    return render_template('populationmap.html')
 
-@app.route('/Hyougo_HanMap.html')
-def Hyougo_HanMap():
+@app.route('/Hyougo_Map.html')
+def Hyougo_Map():
     session.permanent = True  
     session["start"] = True 
-    return render_template('Hyougo_HanMap.html')
-#    return render_template('populationmap.html') 
+    return render_template('Hyougo_Map.html')
 
 @app.route('/Explanation.html')
 def Explanation():
     session.permanent = True  
     session["start"] = True 
     return render_template('Explanation.html')
-
 
 @app.route('/test.html')
 def test():

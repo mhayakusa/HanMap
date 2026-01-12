@@ -1,221 +1,52 @@
 ﻿<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cool Web Site</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'/>
     <script src='https://ktgis.net/leaflet1.3.1/leaflet.js'></script>
     <link rel='stylesheet' href='https://ktgis.net/leaflet1.3.1/leaflet.css' />
     <script src='https://ktgis.net/leaflet1.3.1/L.Map.Sync.js'></script>
     <script src='https://ktgis.net/mandara/mandara2leaflet3.js'></script>
     <script src='https://ktgis.net/mandara/leaflet_tiles.js'></script>
-    <script src='static/関西藩test_data.js'></script>
-    <script src='static/territoryDataOriginal.js'></script>
+    <script src='static/兵庫藩地図_data.js'></script>
+     <script src='static/territoryData.js'></script>
     <script src='static/datatable.js'></script>
     <link rel="stylesheet" href="/static/detailmenu.css" />
-  <style>
-    :root {
-      --bg: #0f0f14;
-      --card: #181824;
-      --accent: linear-gradient(135deg, #6a5cff, #00d4ff);
-      --text: #ffffff;
-      --sub: #b0b0c3;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* ===== ナビゲーション ===== */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15, 15, 20, 0.7);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-    }
-
-    nav ul {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      position: relative;
-      padding: 4px 0;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 100%;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
-
-    nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    /* ===== ヒーロー ===== */
-    header {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding-top: 64px;
-      background:
-        radial-gradient(circle at top, #1c1c3a, transparent 60%),
-        var(--bg);
-    }
-
-    header h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      background: var(--accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeUp 1s ease-out;
-    }
-
-    header p {
-      color: var(--sub);
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      animation: fadeUp 1.3s ease-out;
-    }
-
-    section {
-      padding: 5rem 10%;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: var(--card);
-      padding: 2rem;
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: 0;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-    }
-
-    .card:hover::before {
-      opacity: 0.15;
-    }
-
-    .card * {
-      position: relative;
-      z-index: 1;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--sub);
-      font-size: 0.9rem;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ナビゲーション -->
-  <nav>
-    <ul>
-      <li><a href="#">メニュー1</a></li>
-      <li><a href="#">メニュー2</a></li>
-      <li><a href="#">メニュー3</a></li>
-    </ul>
-  </nav>
-
+  </head>
   <body onload='mapinitialize()' >
     <div id="pageTop"></div>
       <div class="map">
         <div id='twoMapScreenDiv'><input id='twoMapScreenCheck' type='checkbox' checked onchange='twoMapScreenChange()' />2画面表示<br />
         <input id='twoMapScreenSync' type='checkbox' checked onchange='twoMapScreenSyncChange()' />2画面連動<br /></div>
         <div id='leftside' style='z-index:5; font-size:14px; position: absolute; padding:0px;border:solid; border-width:1px'></div>
-        <div id ='titlebox' style='font-size: 14px; text-align: center ; position: absolute'>
+        <div id ='titlebox' style='background-color: aqua;font-size: 14px; text-align: center ; position: absolute'>
           <header>
-              <div>関西の藩地図：大正９年の町村を旧藩で色分け</div>
-              <ul class="navUl" >
-              
-              <li class="pmenu" style="width:30%" ontouchstart="">【 藩一覧 】
+              <div class="site-title">江戸末期の領地：明治の村を色分け</div>
+              <ul class="navUl" >            
+              <li class="pmenu"  ontouchstart=""> 領地選択 
                 <ul class="submenu">
                   <li>
                     <details id=pattern1 style="padding-left: 10px;"> 
                       <summary >A.播磨国</summary>
                         <table>
                           <tbody><tr>
-                            <td><a href="javascript:hanClick('A.播磨国 姫路藩');">姫路藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 山崎藩');">山崎藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 安志藩');">安志藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 三ヶ月藩');">三ヶ月藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 姫路藩');">姫路藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 山崎藩');">山崎藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 安志藩');">安志藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 三ヶ月藩');">三ヶ月藩</a></td>
                           </tr>
                           <tr>
-                            <td><a href="javascript:hanClick('A.播磨国 赤穂藩' );">赤穂藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 福本藩' );">福本藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 三草藩');">三草藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 小野藩' );">小野藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 赤穂藩' );">赤穂藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 福本藩' );">福本藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 三草藩');">三草藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 小野藩' );">小野藩</a></td>
                           </tr>
                           <tr>
                             <td><a href="javascript:hanClick();"></a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 明石藩');">明石藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 竜野藩');">竜野藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 林田藩');">林田藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 明石藩');">明石藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 竜野藩');">竜野藩</a></td>
+                            <td><a href="javascript:hanClick('播磨 林田藩');">林田藩</a></td>
                           </tr>
                           </tbody>
                         </table>
@@ -227,10 +58,10 @@
                             <table>
                               <tbody><tr>
                                 <td></td>
-                                <td><a href="javascript:hanClick('B.摂津国 尼ヶ崎藩');">尼ヶ崎藩</a></td>
-                                <td><a href="javascript:hanClick('B.摂津国 麻田藩');">麻田藩</a></td>
-                                <td><a href="javascript:hanClick('B.摂津国 三田藩');">三田藩</a></td>
-                                <td><a href="javascript:hanClick('B.摂津国 高槻藩');">高槻藩</a></td>
+                                <td><a href="javascript:hanClick('摂津 尼ヶ崎藩');">尼ヶ崎藩</a></td>
+                                <td><a href="javascript:hanClick('摂津 麻田藩');">麻田藩</a></td>
+                                <td><a href="javascript:hanClick('摂津 三田藩');">三田藩</a></td>
+                                <td><a href="javascript:hanClick('摂津 高槻藩');">高槻藩</a></td>
                                 
                               </tr>
                             </tbody>
@@ -243,9 +74,9 @@
                           <table>
                             <tbody><tr>
                               <td></td>
-                              <td><a href="javascript:hanClick('C.但馬国 出石藩');">出石藩</a></td>
-                              <td><a href="javascript:hanClick('C.但馬国 村岡藩');">村岡藩</a></td>
-                              <td><a href="javascript:hanClick('C.但馬国 豊岡藩');">豊岡藩</a></td>
+                              <td><a href="javascript:hanClick('但馬 出石藩');">出石藩</a></td>
+                              <td><a href="javascript:hanClick('但馬 村岡藩');">村岡藩</a></td>
+                              <td><a href="javascript:hanClick('但馬 豊岡藩');">豊岡藩</a></td>
                             </tr>
                           </tbody>
                           </table>
@@ -253,140 +84,47 @@
                   </li>
                   <li>
                     <details> 
-                          <summary id=checkCountryAsia >D.丹後国</summary>
-                          <table>
-                            <tbody><tr>
-                              <td><a href="javascript:hanClick();"></a></td>
-                              <td><a href="javascript:hanClick('D.丹後国 宮津藩');">宮津藩</a></td>
-                              <td><a href="javascript:hanClick('D.丹後国 峯山藩');">峯山藩</a></td>
-                              <td><a href="javascript:hanClick('D.丹後国 舞鶴藩');">舞鶴藩</a></td>
-                              
-                            </tr>
-                          </tbody>
-                          </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary id=checkCountryAsia >E.丹波国</summary>
+                      <summary id=checkCountryAsia >D.丹波国</summary>
                       <table>
                         <tbody>
                           <tr>
-                            <td><a href="javascript:hanClick('E.丹波国 亀岡藩');">亀岡藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 園部藩');">園部藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 山家藩');">山家藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 柏原藩');">柏原藩</a></td>
-                            
-                          </tr>
-                          <tr>
-                            <td><a href="javascript:hanClick('E.丹波国 福知山藩');">福知山藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 篠山藩');">篠山藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 綾部藩');">綾部藩</a></td>                        
+                            <td><a href="javascript:hanClick('丹波 柏原藩');">柏原藩</a></td>
+                            <td><a href="javascript:hanClick('丹波 篠山藩');">篠山藩</a></td>
+                            <td><a href="javascript:hanClick('丹波 亀岡藩');">亀岡藩</a></td>
                             <td></td>
                           </tr>
                         </tbody>
                       </table>
                     </details>
                   </li>
-                  <li>
+                   <li>
                     <details> 
-                      <summary id=checkCountryAsia >H.山城国</summary>
-                      <table>
-                        <tbody>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td><a href="javascript:hanClick('H.山城国 淀藩');">淀藩</a></td>
-
-                          <td></td>
-                        </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary id=checkCountryAsia >河内国・和泉国・紀伊国</summary>
+                      <summary id=checkCountryAsia >E.淡路国</summary>
                       <table>
                         <tbody>
                           <tr>
-                            <td><a href="javascript:hanClick('F.河内国 丹南藩');">河内国 丹南藩</a></td>
-                            <td><a href="javascript:hanClick('F.河内国 狭山藩');">河内国 狭山藩</a></td>
-                            <td><a href="javascript:hanClick('G.和泉国 伯太藩');">和泉国 伯太藩</a></td>
-                            <td><a href="javascript:hanClick('G.和泉国 岸和田藩');">和泉国 岸和田藩</a></td>
-                            
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td><a href="javascript:hanClick('J.紀伊国 和歌山藩');">紀伊国 和歌山藩</a></td>
-                          <td><a href="javascript:hanClick('J.紀伊国 新宮藩');">紀伊国 新宮藩</a></td>
-                          <td><a href="javascript:hanClick('J.紀伊国 田辺藩');">紀伊国 田辺藩</a></td>
-                          
-                        </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary>I.大和国</summary>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td><a href="javascript:hanClick('I.大和国 小泉藩');">小泉藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 柳本藩');">柳本藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 柳生藩');">柳生藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 櫛羅藩');">櫛羅藩</a></td>
-                            
+                            <td><a href="javascript:hanClick('阿波 徳島藩');">阿波 徳島藩</a></td>
                           </tr>
-                          <tr>
-                            <td><a href="javascript:hanClick('I.大和国 田原本藩');">田原本藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 芝村藩');">芝村藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 郡山藩');">郡山藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 高取藩');">高取藩</a></td>
-                          </tr>
-                      </tbody>
+                        </tbody>
                       </table>
                     </details>
                   </li>
-                  <li>
-                    <details> 
-                      <summary id=checkCountryAsia >K.近江国</summary>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td><a href="javascript:hanClick('K.近江国 吉見藩');">吉見藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 大溝藩');">大溝藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 山上藩');">山上藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 彦根藩');">彦根藩</a></td>
-                            
-                          </tr>
-                          <tr>
-                            <td><a href="javascript:hanClick('K.近江国 水口藩');">水口藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 膳所藩');">膳所藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 西大路藩');">西大路藩</a></td>
-                            
-                          <td></td>
-                        </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
+                  
                   <li>
                     <details> 
                       <summary id=checkCountryAsia >幕府・御料地等</summary>
                       <table>
                         <tbody>
                           <tr>
-                            <td><a href="javascript:hanClick('Z. 幕府');">幕府</a></td>
-                            <td><a href="javascript:hanClick('Z. 一橋家');">一橋家</a></td>
-                            <td><a href="javascript:hanClick('Z. 田安家');">田安家</a></td>
-                            <td><a href="javascript:hanClick('Z. 旗本等知行地');">旗本等知行地</a></td>
+                            <td><a href="javascript:hanClick('幕府');">幕府</a></td>
+                            <td><a href="javascript:hanClick('一橋家');">一橋家</a></td>
+                            <td><a href="javascript:hanClick('田安家');">田安家</a></td>
+                            <td><a href="javascript:hanClick('旗本等知行地');">旗本等知行地</a></td>
                           </tr>
                           <tr>
                             <td></td>
-                          <td><a href="javascript:hanClick('Z. 御料・公家領地');">御料・公家領地</a></td>
-                          <td><a href="javascript:hanClick('Z. 寺社領地');">寺社領地</a></td>
+                          <td><a href="javascript:hanClick('御料・公家領地');">御料・公家領地</a></td>
+                          <td><a href="javascript:hanClick('寺社領地');">寺社領地</a></td>
                           <td></td>
                         </tr>
                       </tbody>
@@ -399,47 +137,25 @@
                       <table>
                         <tbody>
                         <tr>
-                          <td><a href="javascript:hanClick('阿波国 徳島藩');">阿波国 徳島藩</a></td>
-                          <td><a href="javascript:hanClick('讃岐国 丸亀藩');">讃岐国 丸亀藩</a></td>
-                          <td><a href="javascript:hanClick('伊勢国 久居藩');">伊勢国 久居藩</a></td>
-                          <td><a href="javascript:hanClick('伊勢国 桑名藩');">伊勢国 桑名藩</a></td>
-                          <td><a href="javascript:hanClick('伊勢国 津藩');">伊勢国 津藩</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('若狭国 小浜藩');">若狭国 小浜藩</a></td>
-                          <td><a href="javascript:hanClick('備中国 岡田藩');">備中国 岡田藩</a></td>
-                          <td><a href="javascript:hanClick('加賀国 金沢藩');">加賀国 金沢藩</a></td>
-                          <td><a href="javascript:hanClick('美濃国 加納藩');">美濃国 加納藩</a></td>
+                          <td><a href="javascript:hanClick('讃岐 丸亀藩');">讃岐 丸亀藩</a></td>
+                          <td><a href="javascript:hanClick('備中 浅尾藩');">備中 浅尾藩</a></td>
+                          <td><a href="javascript:hanClick('近江 山上藩');">近江 山上藩</a></td>
+                          <td><a href="javascript:hanClick('大和 小泉藩');">大和 小泉藩</a></td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td><a href="javascript:hanClick('三河国 半原藩');">三河国 半原藩</a></td>
-                          <td><a href="javascript:hanClick('三河国 豊橋藩');">三河国 豊橋藩</a></td>
-                          <td><a href="javascript:hanClick('遠江国 浜松藩');">遠江国 浜松藩</a></td>
-                          <td><a href="javascript:hanClick('相模国 小田原藩');">相模国 小田原藩</a></td>
-                          <td><a href="javascript:hanClick('下総国 古河藩');">下総国 古河藩</a></td>
+                          <td><a href="javascript:hanClick('尾張 名古屋藩');">尾張 名古屋藩</a></td>
+                          <td><a href="javascript:hanClick('遠江 浜松藩');">遠江 浜松藩</a></td>
+                          <td><a href="javascript:hanClick('武蔵 忍藩');">武蔵 忍藩</a></td>
+                          <td><a href="javascript:hanClick('武蔵 岡部藩');">武蔵 岡部藩</a></td>
                         </tr>
                         <tr>
-                          <td><a href="javascript:hanClick('武蔵国 岡部藩');">武蔵国 岡部藩</a></td>
-                          <td><a href="javascript:hanClick('武蔵国 川越藩');">武蔵国 川越藩</a></td>
-                          <td><a href="javascript:hanClick('武蔵国 忍藩');">武蔵国 忍藩</a></td>
-                          <td><a href="javascript:hanClick('上総国 飯野藩');">上総国 飯野藩</a></td>
-                          <td><a href="javascript:hanClick('上総国 鶴牧藩');">上総国 鶴牧藩</a></td>
+                          <td><a href="javascript:hanClick('上総 飯野藩');">上総 飯野藩</a></td>
+                          <td><a href="javascript:hanClick('上総 鶴牧藩');">上総 鶴牧藩</a></td>
+                          <td><a href="javascript:hanClick('下総 古河藩');">下総 古河藩</a></td>
+                          <td><a href="javascript:hanClick('下野 壬生藩');">下野 壬生藩</a></td>
+                          <td><a href="javascript:hanClick('陸奥 棚倉藩');">陸奥 棚倉藩</a></td>
                         </tr>
-                        <td><a href="javascript:hanClick('上野国 沼田藩');">上野国 沼田藩</a></td>
-                        <td><a href="javascript:hanClick('上野国 館林藩');">上野国 館林藩</a></td>
-                        <td><a href="javascript:hanClick('下野国 佐野藩');">下野国 佐野藩</a></td>
-                        <td><a href="javascript:hanClick('下野国 壬生藩');">下野国 壬生藩</a></td>
-                        <td><a href="javascript:hanClick('下野国 宇都宮藩');">下野国 宇都宮藩</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('常陸国 土浦藩');">常陸国 土浦藩</a></td>
-                          <td><a href="javascript:hanClick('出羽国 山形藩');">出羽国 山形藩</a></td>
-                          <td><a href="javascript:hanClick('陸奥国 棚倉藩');">陸奥国 棚倉藩</a></td>
-                          <td><a href="javascript:hanClick('陸奥国 会津藩');">陸奥国 会津藩</a></td>
-                          <td><a href="javascript:hanClick('陸奥国 湯長谷藩');">陸奥国 湯長谷藩</a></td>
-                          
-                        </tr>                     
                       </tbody>
                       </table>
                     </details>
@@ -449,9 +165,9 @@
                   </li>
                 </ul>
               </li>
-              <li style="width:20%"><a href="#dataDiv">【 村一覧  】</a></li>
-              <li style="width:20%"><a href="Hyougo_HanMap.html">兵庫県詳細藩地図</a></li>
-              <li><a href="Explanation.html">【 解説  】</a></li>
+              <li ><a href="#dataDiv"> 村一覧</a></li>
+              <li ><a href="index.html">関西藩地図</a></li>
+              <li><a href="Explanation.html"> 解説  </a></li>
             </ul>
           </header>
         </div>
@@ -463,7 +179,7 @@
       <div class="dataheader">
            <!-- <nav style="justify-content: start;padding-top: 100px;background-color: rgb(128, 224, 248);">-->
             <nav style="justify-content: start;padding-top: 10px;">
-                  <div style="font-weight: bold;border-right:0px;width:200px">【<label id="dispVilName" >全</label> 町村一覧】</div>
+                  <div style="font-weight: bold;border-right:0px;width:200px">【<label id="dispVilName" >全</label> 村一覧】</div>
           </nav>
           <!--<div class="dataheader">-->
             <nav class="subnav" >
@@ -480,29 +196,7 @@
        <!-- ***** 動的に作成されるデータ一覧表の部分-->
       <div id="table" >              
       </div> 
-
-  <section>
-    <div class="cards">
-      <div class="card">
-        <h3>🚀 Fast</h3>
-        <p>軽量で高速なパフォーマンスを実現。</p>
-      </div>
-      <div class="card">
-        <h3>🎨 Design</h3>
-        <p>モダンで洗練されたUI/UX。</p>
-      </div>
-      <div class="card">
-        <h3>🔧 Flexible</h3>
-        <p>どんな用途にもカスタマイズ可能。</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © 2026 Cool Web Site
-  </footer>
-
-</body>
+  </body>
   <script>
   function mapinitialize(){
 
@@ -535,7 +229,7 @@
 function hanClick(HanName){
  var readdata = "";
   if (HanName =="ALL"){
-    HanName = "旧国名"
+    HanName = "領地"
   }
 
  selectElm = document.getElementById("dataitem0:0")
@@ -553,7 +247,7 @@ function hanClick(HanName){
   changeDataItem(0,0,false)
   selectElm.onchange()
 
-  if(HanName =="旧国名"){
+  if(HanName =="領地"){
     makeTable();
   }else {
     spt = HanName.split(" ")
@@ -563,3 +257,4 @@ function hanClick(HanName){
  }
   </script>
 </html>
+
