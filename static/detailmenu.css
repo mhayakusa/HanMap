@@ -2,7 +2,7 @@ body {
     margin: 2;
     font-family: "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
     -webkit-text-size-adjust: none;
-    --hedder-height:30px;
+    --hedder-height:40px;
     --tablefontsize:11px;
     --hederZindex:100;
     --menuZindex:50;
@@ -10,25 +10,43 @@ body {
     --tableTHZindex:20;
     --tableTDZindex:15;
     --tableTDOverZindex:18;
+    --accent: linear-gradient(135deg, #6a5cff, #00d4ff);
     --back-color:#c3f9df;
       background: #fff;	/*背景色*/
     color: black;	    /*全体の文字色*/
     text-align: center;
 }
+.map {
+  position:  relative;
+  height: 100vh;
+}
 header {
-	position: fixed;
+	/*position: fixed;*/
   display: flex;
-  justify-content:space-between;
+ /* justify-content:space-between;*/
 	width: 100%;
 	height: var(--hedder-height);
 	top: 0;
 	z-index: var( --hederZindex);
   background-color:var(--back-color); /* ヘッダーの背景色を指定する */
+  
   padding: 0 ; 
   margin: 0;
  	font-size: 14px;
 	font-weight: bold;
-  text-align: center;  
+  text-align: left;  
+}
+.site-title {
+  font-size: 1.2rem;
+/*  font-weight: 700;*/
+  font-weight: bold;
+  background: var(--accent);
+/*  background-clip: text;*/
+  color: white;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+  padding: 5px ; 
+  margin: 2px;
 }
 .NavigationMenu{
   display: flex;
@@ -43,11 +61,21 @@ header {
 }  
 .navUl{
   display: flex;
+  padding-left: 0;
   flex-direction: row;
- /* align-items: flex-start;*/
+  /*background-color: #cc0000;*/
+  align-items: flex-start;
+  
 }
 .navUl li{
   list-style:none;
+  flex: auto;
+  text-align: center;
+  padding: 2px;
+  width:20%;
+  border-left: 1px solid rgb(197, 196, 196);
+  border-right: 1px solid rgb(197, 196, 196);
+
 }
 .NavigationMenu input{
   vertical-align: top;
@@ -56,10 +84,15 @@ header {
 }
 .dataheader {
 	z-index:var(--tableZindex);
-/*	height: 100;*/
-	display: flex;
-	flex-direction: column;
-    background: var(--background-subheader);
+	height: 100;
+  position:sticky;
+  top:30px;  
+  /*top:100vh;
+  position:relative;  
+  flex-direction: column;
+  */
+ 	display: flex;
+	background: rgb(200, 243, 245);
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -212,37 +245,43 @@ clear: both;*/
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.searchResult {
-  display: flex;
-  position: absolute;
-  font-size: 11px;
+.territoryTable {
+  text-align: center;
+  table-layout:fixed; 
+  width:60%;
+  font-size:12px; 
   font-weight: bold;
-  top:var(--hedder-height);
-  left:120px;
-  visibility: hidden;
-  background-color: rgb(239, 225, 196);
-  text-align: left;
-  z-index: 20;
-  overflow: auto;
-/*  height:  calc(100% -100px);
-  height: 300px;*/
-  flex-wrap: wrap;
-  align-items: baseline;
+  margin: 10;
+  padding: 10px;
+  border-spacing: 0;
 }
-.jidaiul {
-  text-align: left;
-/*    list-style-type:circle */
-  list-style-type: none;
-  text-wrap: nowrap; 
-  text-overflow: ellipsis;
+.territoryTable th{
+  z-index: var(--tableTHZindex);
+  position: sticky;
+  top:80px;
+  font-size:12px;
+  padding: 0.2rem;
   margin: 0;
-  z-index: var(--tableTDZindex);
-  position: relative;
+  text-align: center;
+  background: rgb(200, 243, 245);
+  border: 1px solid black;
 }
+.territoryTable td {
+/*  text-align: start;*/
+  text-align: center;
+  margin-top: 0;
+  padding: 0;
+  vertical-align: top;
+  border-left: 1px solid black;
+}
+/*.territoryTable td:first-child {
+  border-left: 1px solid black;
+}*/
+.territoryTable td:last-child{
+  border-right: 1px solid black;
+}
+.territoryTable tr:last-child>*{
+  border-bottom: 1px solid black;
+}
+/* margin-top: var(--hedder-height);*/
 
-.jidaiul:hover  .colortext{
-background-color: rgb(230, 246, 221);
-z-index: (--tableTDOverZindex);
-font-weight: bold;
-opacity: 7;
-}

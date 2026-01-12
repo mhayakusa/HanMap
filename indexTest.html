@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cool Web Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f14;
+      --card: #181824;
+      --accent: linear-gradient(135deg, #6a5cff, #00d4ff);
+      --text: #ffffff;
+      --sub: #b0b0c3;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ===== ナビゲーション ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 64px;
+      background: rgba(15, 15, 20, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a.menu {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    nav a.menu::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav a.menu:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* ===== ヒーロー ===== */
+    header {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 64px;
+      background:
+        radial-gradient(circle at top, #1c1c3a, transparent 60%),
+        var(--bg);
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeUp 1s ease-out;
+    }
+
+    header p {
+      color: var(--sub);
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      animation: fadeUp 1.3s ease-out;
+    }
+
+    section {
+      padding: 5rem 10%;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--sub);
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="site-title">Cool Web</a>
+      <ul>
+        <li><a href="#" class="menu">メニュー1</a></li>
+        <li><a href="#" class="menu">メニュー2</a></li>
+        <li><a href="#" class="menu">メニュー3</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header>
+    <div>
+      <h1>Next Generation Web</h1>
+      <p>シンプルで、美しく、強いデザイン</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="cards">
+      <div class="card">
+        <h3>🚀 Fast</h3>
+        <p>軽量で高速なパフォーマンスを実現。</p>
+      </div>
+      <div class="card">
+        <h3>🎨 Design</h3>
+        <p>モダンで洗練されたUI/UX。</p>
+      </div>
+      <div class="card">
+        <h3>🔧 Flexible</h3>
+        <p>どんな用途にもカスタマイズ可能。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Cool Web Site
+  </footer>
+
+</body>
+</html>

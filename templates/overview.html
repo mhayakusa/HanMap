@@ -1,0 +1,250 @@
+<html lang="ja">
+<meta charset="utf-8" >
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>市町村データを可視化してみた</title>
+<style>
+  @media screen and (max-width: 768px) {
+    .wrapper {
+        display: grid;
+        grid-gap: 10px;
+      }
+      .body{
+        /*margin: 100px 50px*/
+        margin: 1rem 1rem 0 1rem;
+        text-align: left;
+        padding: auto;
+        /*background: rgb(222, 245, 221);*/
+/*        width: 80%;*/
+
+      }
+    }
+
+  @media screen and (max-width: 480px) {
+      .body{
+        /*margin: 100px 50px*/
+        margin-left: 2px ; 
+        margin-right: 2px ;
+        text-align: left;
+        padding: auto;
+        font-size: 10 px;
+/*        background: rgb(241, 248, 241); */
+/*        width: 80%;*/
+
+      }
+  }
+.body{
+        
+        /*margin: 100px 50px*/
+        margin-left: 5% ;
+        margin-right: 5% ;
+        text-align: left;
+        padding: auto;
+        font-size: 11 px;
+        /*background: rgb(222, 245, 221);*/
+/*        width: 80%;*/
+
+}
+
+
+h3 {
+  background-color: #bcf0bf; /*青色*/
+}
+.wrapper {
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: 1fr; 
+        grid-template-rows: 400px 150px; 
+}
+.box1{
+      grid-column-start: 1;
+      grid-row-start: 1;
+}
+.box2{
+      grid-column-start: 1;
+      grid-row-start: 2;
+}
+.box3{
+      grid-column-start: 1;
+      grid-row-start: 3;
+}
+/*          .table1{
+      margin: auto; 
+      grid-column-start: 1;
+      grid-row-start: 2;
+      
+    }
+    .table2{
+      margin: auto; 
+      grid-column-start: 1;
+      grid-row-start: 4;
+      
+    }　*/
+ /*   .body{
+        margin: 1rem 5rem 0 5rem;
+        text-align: left;
+        padding: auto;
+        width: 80%;
+
+      }*/
+
+button { width: 80px;height: 40px;background: #3ee7; color: black; 
+          padding:5px 0 5px;
+          border-radius: 5px;
+          display: inline; font-size:16px; font-weight: bold; 
+          text-align: center;
+          align-items: center ;
+       }
+.button01 {
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        text-align: center;
+        align-items: center ;
+        /*justify-content: space-around;
+        align-items: center;
+        background-color:  rgb(247, 144, 27);*/
+        padding: 5px 5px;
+        background: rgb(240, 156, 60);
+        color: black;
+        box-shadow: 2px 2px rgb(3, 116, 100);
+        font-size:14px;
+        font-weight: bold;
+      }
+.button01 a:hover {
+      background: #313131;
+      color: #FFF;
+    }
+.button01 a:after {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-top: 3px solid #313131;
+      border-right: 3px solid #313131;
+      transform: rotate(45deg) translateY(-50%);
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      border-radius: 1px;
+      transition: 0.3s ease-in-out;
+}
+.button01 a:hover:after {
+      border-color: #FFF;
+}
+</style>
+<header>
+    <h2>このアプリについて</h2>
+    <div id="pageTop"></div>
+    <ul style="display: flex; flex-direction: row; list-style: none;" >
+        <li style="font-weight: bold;border-right:0px">表示できる市町村色別地図</li>
+        <li style="padding-left: 50px;"></li>
+        <li style="padding-left: 10px;">
+          <a href='/mapindex'>人口分析・推計</a>
+        </li>
+        <li style="padding-left: 10px;">
+          <a href='/財政力調査'>財政力調査</a> 
+        </li>
+        <li style="padding-left: 10px;">  <a href='/学校'>病院・学校等施設</a>  </li>
+        <li style="padding-left: 10px;">  <a href='/appendix'>ふるさと納税など</a> </li>
+        <li style="padding-left: 10px;">  <a href='/高速道路'>高速道路</a>  </li>
+        <li style="padding-left: 10px;" >
+          <a href="/vilindex">市町村詳細</a>
+        </li>
+        <li  style="padding-left: 10px;">
+          <a href='/manual'>使い方</a>
+        </li>
+      </ul>   
+  </header>
+  <body class="body" >
+    <div class="box1">
+      このアプリは、<a href="https://ktgis.net/mandara/">埼玉大学 谷謙二先生作成の地理情報分析支援システム「MANDARA」</a>を使用し[MANDARA」で出力できるleaflet用Javascriptを若干改造し、データ表機能などを追加したものです。<br>
+      市町村別に各種のカテゴリーで色分けした地図と、各市町村の人口構成や人口密度を可視化するために、１００人の村にしたイメージを表示するアプリです。<br>
+      可視化するために以下のデータを利用しました。
+      <br>
+      <ul style="list-style: none;">
+        <li >人口分析：総務省発表の「住民基本台帳に基づく人口、人口動態及び世帯数（2024年1月1日現在）」の市町村別の年齢階級別人口データを可視化</li>
+        <li >２０２５年人口推計：国立社会保障・人口問題研究所が令和5年12月22日公表した将来推計人口の2050年のデータを可視化</li>
+        <li >財政力調査：総務省発表の地方公共団体の令和4年度主要財政指標一覧の財務力指標などを可視化</li>  
+        <li>市町村の消滅可能性：2024年4月24日に人口戦略会議が発表した消滅可能性のある自治体や自立持続可能な自治体</li>      
+        <li >病院数・診療所数：各地方厚生局が公表している医療機関一覧の２０２３年６月時点のデータを独自集計</li>
+        <li >市町村の面積：e-Stat（政府統計の総合窓口）の20203年6月に公開された２０２１年度調査の面積・可住面積、主要湖沼面積</li>
+        <li>高等学校、大学：国土地理院の数値情報の「学校データ」2023年度（令和5年度）版のデータと文科省学校コード一覧の高等学校の情報</li>
+        <li>高速道路情報：国土地理院の数値情報の「高速道路時系列」2023年度（令和5年度）版のデータとNEXCOの高速料金・ルート検索のIC情報を合成</li>
+        <li>駅データ：駅データ.JPの２０２４年３月末時点のデータ</li>
+        <li>ゴルフ場数：２０２４年５月にネットから収集できる各種情報を独自集計。ショートコースは除いたもの。</li>
+        </ul>
+      <br>
+      <p>Webアプリなのでスマホでも楽しめますが、画面が大きなPCやタブレットでの利用がおすすめです。</P>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="box2" style="margin:auto; ">
+        <h3>市町村の色別地図では、</H3>
+        総人口、人口密度、生産年齢人口比率、高齢者人口比率、外国人比率、1万人当たりの病院数、診療所数などの指標で市町村別に色別した地図上に
+        <p>消滅可能性をONにすれば、自治体の消滅可能性を色丸印で表示します</p>
+        <p>上位マーク、下位マークをチェックすれば、各項目でTOP50、Botom50の市町村をマークできます。</p>
+        <P>元のデータを表形式で表示するでき、データをソートしたり、条件を指定して絞りこんで地図と連携する機能もあります。</P>
+        <p>ソートと条件指定の絞り込み機能で、「XX県の人口密度Top50」のようなランキングが簡単に確認できます。</P>
+        <p>地図上に病院数、ゴルフ場数、病院が無い、駅が無いなどの施設状況を表すアイコンを表示する機能があります</P>
+          </div>
+      <div style="clear: both;"></div>
+      <H3 style="background: rgb(240, 156, 60);">市町村詳細データ</H3>
+        市町村の人口構成のデータや面積、財政力の詳細データを表示する。人口構成については分かりやすく可視化するために１００人の村にしてイメージで、どんな人口構成か、
+        どんな土地に住んでいるか（可住地面積や森林面積の比率、広さ）を表したイメージ図を表示します。
+        市町村の各項目ごとの全国平均、都道府県平均と比較したり、全国順位、都道府県内順位も表示するので、他市町村と比較して状況がよりが理解できると思います。
+        指定の都道府県の全市町村のイメージ図を自動的に順番に表示する機能もあるので、ざっと比較する場合に利用できます。
+        <p></p>
+        
+      </div>
+      <H3 style="background: rgb(240, 156, 60);">使用しているデータ</H3>
+      <ul style="list-style-type: none;">
+          <li>○市町村別人口
+           <ul style="list-style-type: none;">
+            <li><a href="https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html">総務省 住民基本台帳に基づく人口、人口動態及び世帯数 </a></li>
+            <li><a href="https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00200241&tstat=000001039591">e-Stat（政府統計の総合窓口） </a> *ここには各種データあり</li>
+          </ul>
+          </li>
+          <li>○面積
+           <ul style="list-style-type: none;">
+            <li><a href="https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm">国土地理院 全国都道府県市区町村別面積調</a></li>
+            <li><a href="https://www.e-stat.go.jp/regional-statistics/ssdsview/municipality">e-Stat（政府統計の総合窓口） </a> 表示項目で 分野 B自然環境 大分類 B1 土地面積 を指定して取得</li>
+           </ul>
+          </li>
+          <li>○医療機関
+           <ul style="list-style-type: none;">
+            <li><a href="https://jmap.jp/cities/search">JMAP 地域医療情報システム</a></li>
+            <li>下記の地方厚生局毎に医療機関一覧が管理されている（管理方法が微妙に異なる!!）</li>
+            <table >
+              <tr >
+                  <td width="20%"><a href="https://kouseikyoku.mhlw.go.jp/hokkaido/gyomu/gyomu/hoken_kikan/code_ichiran.html">北海道厚生局 </a>                      
+                  </td>
+                  <td width="20%">
+                      <a href="https://kouseikyoku.mhlw.go.jp/tohoku/gyomu/gyomu/hoken_kikan/itiran.html">東北厚生局 </a> 
+                  </td>
+                  <td width="20%">
+                      <a href="https://kouseikyoku.mhlw.go.jp/kantoshinetsu/chousa/shitei.html">関東信越厚生局 </a>
+                  </td>
+                  <td width="20%">
+                      <a href="https://kouseikyoku.mhlw.go.jp/tokaihokuriku/newpage_00287.html">東海北陸厚生局 </a>                      
+                  </td>
+                  
+              </tr>
+              <tr style=" margin: left; ">
+                  <td><a href="https://kouseikyoku.mhlw.go.jp/kinki/tyousa/shinkishitei.html">近畿厚生局 </a>                   
+                  </td>
+                  <td>
+                      <a href="https://kouseikyoku.mhlw.go.jp/chugokushikoku/chousaka/iryoukikanshitei.html">中国四国厚生局</a> 
+                  </td>
+                  <td>
+                      <a href="https://kouseikyoku.mhlw.go.jp/shikoku/gyomu/gyomu/hoken_kikan/shitei/index.html">四国厚生支局</a>
+                  </td>
+                  <td><a href="https://kouseikyoku.mhlw.go.jp/kyushu/gyomu/gyomu/hoken_kikan/index_00006.html">九州厚生局</a>                      
+                  </td>
+              
+              </tr>
+            </table>
+             </ul>
+          </li>
+      </ul>       
+  </div>
+  <!--</div>-->
+  </body>
+</html>
