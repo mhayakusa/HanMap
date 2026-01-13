@@ -84,7 +84,7 @@ header {
 }
 .dataheader {
 	z-index:var(--tableZindex);
-	height: 100;
+	height: 50px;
   position:sticky;
   top:0px;  
   /*top:100vh;
@@ -95,6 +95,7 @@ header {
 	background: rgb(200, 243, 245);
 	font-size: 14px;
 	font-weight: bold;
+  padding-bottom: 0px;
 }
 
 .title{
@@ -252,15 +253,17 @@ clear: both;*/
   font-size:12px; 
   font-weight: bold;
   margin: 0;
-  padding: 10px;
+  padding: 0px;
   border-spacing: 0;
+  /*border: 1px solid rgb(223, 255, 82);*/
+  
 }
 .territoryTable th{
   z-index: var(--tableTHZindex);
   position: sticky;
   top:50px;
   font-size:12px;
-  padding: 0.2rem;
+  padding: 0;
   margin: 0;
   text-align: center;
   background: rgb(200, 243, 245);
