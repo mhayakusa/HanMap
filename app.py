@@ -17,6 +17,12 @@ def index():
     session["start"] = True 
     return render_template('index.html')
 
+@app.route('/Kansai_Map.html')
+def Kansai_Map():
+    session.permanent = True  
+    session["start"] = True 
+    return render_template('Kansai_Map.html')
+
 @app.route('/Hyougo_Map.html')
 def Hyougo_Map():
     session.permanent = True  
@@ -29,11 +35,11 @@ def Explanation():
     session["start"] = True 
     return render_template('Explanation.html')
 
-@app.route('/test.html')
-def test():
+@app.route('/manual.html')
+def manual():
     session.permanent = True  
     session["start"] = True 
-    return render_template('test.html')
+    return render_template('manual.html')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
+    font-size: 11pt;
+    --accent: linear-gradient(135deg, #6a5cff, #00d4ff);
+    --back-color:#c3f9df;
+      background: #fff;	/*背景色*/
+    color: black;	    /*全体の文字色*/
+    /*text-align: center;*/
+}
+
+img{
+  max-width: 50%;
+}
+h1{
+  margin: 0;
+}
+.a{
+  width: 1200px;
+  margin: 0 auto;
+}
+.a .logo{
+  width: 100px;
+/*  margin-top: 36px;*/
+  margin-left: 4%;  
+ 
+}
+.header{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #6fb5ff;
+  text-align: center;
+  position: sticky;
+  top:0;
+  z-index: 10;
+}
+.h-nav{
+  margin-top: 0;
+  padding: 0;
+ }
+.main{
+  float: left;
+  width: 50%;
+  padding: 10px;
+  background-color: #b3d874;
+  text-align: center;
+/*  height:400px;*/
+}
+.side{
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #ff838b;
+  text-align: center;
+}
+.kaisetsu{
+  display: block;
+  text-align: left;
+  margin: 0 auto;
+/*  padding: 10px;*/
+}
+.b{
+  letter-spacing: -.4em;
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style: none;
+  padding: 0;
+}
+.b li{
+  letter-spacing: normal;
+  display: inline-block;
+  width: calc(100%/6);
+}
+.b li a{
+  display: block;
+  text-decoration: none;
+  position: relative;
+  text-align: center;
+  padding: 10px 0px;
+  text-transform: none;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+.c{
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.h-img{
+  max-height: 400px;
+  min-width: 1200px;
+}
+h3 {
+  background-color: #bcf0bf; /*青色*/
+}
+.wrapper {
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: 1fr; 
+        grid-template-rows: 400px 150px; 
+}
+.box1{
+      grid-column-start: 1;
+      grid-row-start: 1;
+}
+.box2{
+      grid-column-start: 1;
+      grid-row-start: 2;
+}
+.box3{
+      grid-column-start: 1;
+      grid-row-start: 3;
+}
+/*       

@@ -1,376 +1,232 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title></title>
     <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
     <meta name='viewport' content='width=device-width,initial-scale=1.0'/>
-    <script src='https://ktgis.net/leaflet1.3.1/leaflet.js'></script>
-    <link rel='stylesheet' href='https://ktgis.net/leaflet1.3.1/leaflet.css' />
-    <script src='https://ktgis.net/leaflet1.3.1/L.Map.Sync.js'></script>
-    <script src='https://ktgis.net/mandara/mandara2leaflet3.js'></script>
-    <script src='https://ktgis.net/mandara/leaflet_tiles.js'></script>
-    <script src='static/関西藩test_data.js'></script>
-    <script src='static/territoryDataOriginal.js'></script>
-    <script src='static/datatable.js'></script>
-    <link rel="stylesheet" href="/static/detailmenu.css" />
+    <link rel="stylesheet" href="static/manual.css" />
   </head>
-  <body onload='mapinitialize()' >
-    <div id="pageTop"></div>
-      <div class="map">
-        <div id='twoMapScreenDiv'><input id='twoMapScreenCheck' type='checkbox' checked onchange='twoMapScreenChange()' />2画面表示<br />
-        <input id='twoMapScreenSync' type='checkbox' checked onchange='twoMapScreenSyncChange()' />2画面連動<br /></div>
-        <div id='leftside' style='z-index:5; font-size:14px; position: absolute; padding:0px;border:solid; border-width:1px'></div>
-        <div id ='titlebox' style='background-color: aqua; font-size: 14px; text-align: center ; position: absolute'>
-          <header>
-              <div class="site-title">関西の藩地図：大正９年の町村を旧藩で色分け</div>
-              <ul class="navUl" >
-              
-              <li class="pmenu"  ontouchstart=""> 領地選択 
-                <ul class="submenu">
-                  <li>
-                    <details id=pattern1 style="padding-left: 10px;"> 
-                      <summary >播磨国</summary>
-                        <table>
-                          <tbody><tr>
-                            <td><a href="javascript:hanClick('A.播磨国 姫路藩');">姫路藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 山崎藩');">山崎藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 安志藩');">安志藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 三ヶ月藩');">三ヶ月藩</a></td>
-                          </tr>
-                          <tr>
-                            <td><a href="javascript:hanClick('A.播磨国 赤穂藩' );">赤穂藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 福本藩' );">福本藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 三草藩');">三草藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 小野藩' );">小野藩</a></td>
-                          </tr>
-                          <tr>
-                            <td><a href="javascript:hanClick();"></a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 明石藩');">明石藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 竜野藩');">竜野藩</a></td>
-                            <td><a href="javascript:hanClick('A.播磨国 林田藩');">林田藩</a></td>
-                          </tr>
-                          </tbody>
-                        </table>
-                      </details>
-                  </li>
-                  <li>
-                      <details> 
-                            <summary>摂津国</summary>
-                            <table>
-                              <tbody><tr>
-                                <td><a href="javascript:hanClick('B.摂津国 尼ヶ崎藩');">尼ヶ崎藩</a></td>
-                                <td><a href="javascript:hanClick('B.摂津国 麻田藩');">麻田藩</a></td>
-                                <td><a href="javascript:hanClick('B.摂津国 三田藩');">三田藩</a></td>
-                                <td><a href="javascript:hanClick('B.摂津国 高槻藩');">高槻藩</a></td>
-                              </tr>
-                            </tbody>
-                            </table>
-                      </details>
-                  </li>
-                  <li>
-                    <details> 
-                          <summary  >但馬国</summary>
-                          <table>
-                            <tbody><tr>
-                              <td></td>
-                              <td><a href="javascript:hanClick('C.但馬国 出石藩');">出石藩</a></td>
-                              <td><a href="javascript:hanClick('C.但馬国 村岡藩');">村岡藩</a></td>
-                              <td><a href="javascript:hanClick('C.但馬国 豊岡藩');">豊岡藩</a></td>
-                            </tr>
-                          </tbody>
-                          </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                          <summary  >丹後国</summary>
-                          <table>
-                            <tbody><tr>
-                              <td></td>
-                              <td><a href="javascript:hanClick('D.丹後国 宮津藩');">宮津藩</a></td>
-                              <td><a href="javascript:hanClick('D.丹後国 峯山藩');">峯山藩</a></td>
-                              <td><a href="javascript:hanClick('D.丹後国 舞鶴藩');">舞鶴藩</a></td>
-                            </tr>
-                          </tbody>
-                          </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary  >丹波国</summary>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td><a href="javascript:hanClick('E.丹波国 亀岡藩');">亀岡藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 園部藩');">園部藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 山家藩');">山家藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 柏原藩');">柏原藩</a></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td><a href="javascript:hanClick('E.丹波国 福知山藩');">福知山藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 篠山藩');">篠山藩</a></td>
-                            <td><a href="javascript:hanClick('E.丹波国 綾部藩');">綾部藩</a></td>                        
-                          </tr>
-                        </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary  >山城国</summary>
-                      <table>
-                        <tbody>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td><a href="javascript:hanClick('H.山城国 淀藩');">淀藩</a></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary  >河内国・和泉国・紀伊国</summary>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td><a href="javascript:hanClick('F.河内国 丹南藩');">河内国 丹南藩</a></td>
-                            <td><a href="javascript:hanClick('F.河内国 狭山藩');">河内国 狭山藩</a></td>
-                            <td><a href="javascript:hanClick('G.和泉国 伯太藩');">和泉国 伯太藩</a></td>
-                            <td><a href="javascript:hanClick('G.和泉国 岸和田藩');">和泉国 岸和田藩</a></td>
-                            
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td><a href="javascript:hanClick('J.紀伊国 和歌山藩');">紀伊国 和歌山藩</a></td>
-                          <td><a href="javascript:hanClick('J.紀伊国 新宮藩');">紀伊国 新宮藩</a></td>
-                          <td><a href="javascript:hanClick('J.紀伊国 田辺藩');">紀伊国 田辺藩</a></td>
-                          
-                        </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary>大和国</summary>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td><a href="javascript:hanClick('I.大和国 小泉藩');">小泉藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 柳本藩');">柳本藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 柳生藩');">柳生藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 櫛羅藩');">櫛羅藩</a></td>
-                            
-                          </tr>
-                          <tr>
-                            <td><a href="javascript:hanClick('I.大和国 田原本藩');">田原本藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 芝村藩');">芝村藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 郡山藩');">郡山藩</a></td>
-                            <td><a href="javascript:hanClick('I.大和国 高取藩');">高取藩</a></td>
-                          </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary  >近江国</summary>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td><a href="javascript:hanClick('K.近江国 吉見藩');">吉見藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 大溝藩');">大溝藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 山上藩');">山上藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 彦根藩');">彦根藩</a></td>
-                            
-                          </tr>
-                          <tr>
-                            <td><a href="javascript:hanClick('K.近江国 水口藩');">水口藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 膳所藩');">膳所藩</a></td>
-                            <td><a href="javascript:hanClick('K.近江国 西大路藩');">西大路藩</a></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary  >幕府・御料地等</summary>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td><a href="javascript:hanClick('Z. 幕府');">幕府</a></td>
-                            <td><a href="javascript:hanClick('Z. 一橋家');">一橋家</a></td>
-                            <td><a href="javascript:hanClick('Z. 田安家');">田安家</a></td>
-                            <td><a href="javascript:hanClick('Z. 旗本等知行地');">旗本等知行地</a></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                          <td><a href="javascript:hanClick('Z. 御料・公家領地');">御料・公家領地</a></td>
-                          <td><a href="javascript:hanClick('Z. 寺社領地');">寺社領地</a></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <details> 
-                      <summary  >他国の藩</summary>
-                      <table>
-                        <tbody>
-                        <tr>
-                          <td><a href="javascript:hanClick('阿波国 徳島藩');">阿波国 徳島藩</a></td>
-                          <td><a href="javascript:hanClick('讃岐国 丸亀藩');">讃岐国 丸亀藩</a></td>
-                          <td><a href="javascript:hanClick('若狭国 小浜藩');">若狭国 小浜藩</a></td>
-                          <td><a href="javascript:hanClick('備中国 岡田藩');">備中国 岡田藩</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('伊勢国 津藩');">伊勢国 津藩</a></td>
-                          <td><a href="javascript:hanClick('伊勢国 久居藩');">伊勢国 久居藩</a></td>
-                          <td><a href="javascript:hanClick('伊勢国 桑名藩');">伊勢国 桑名藩</a></td>
-                          <td><a href="javascript:hanClick('加賀国 金沢藩');">加賀国 金沢藩</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('美濃国 加納藩');">美濃国 加納藩</a></td>
-                          <td><a href="javascript:hanClick('三河国 半原藩');">三河国 半原藩</a></td>
-                          <td><a href="javascript:hanClick('三河国 豊橋藩');">三河国 豊橋藩</a></td>
-                          <td><a href="javascript:hanClick('遠江国 浜松藩');">遠江国 浜松藩</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('相模国 小田原藩');">相模国 小田原藩</a></td>
-                          <td><a href="javascript:hanClick('武蔵国 岡部藩');">武蔵国 岡部藩</a></td>
-                          <td><a href="javascript:hanClick('武蔵国 川越藩');">武蔵国 川越藩</a></td>
-                          <td><a href="javascript:hanClick('武蔵国 忍藩');">武蔵国 忍藩</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('上総国 飯野藩');">上総国 飯野藩</a></td>
-                          <td><a href="javascript:hanClick('上総国 鶴牧藩');">上総国 鶴牧藩</a></td>
-                          <td><a href="javascript:hanClick('下総国 古河藩');">下総国 古河藩</a></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('上野国 沼田藩');">上野国 沼田藩</a></td>
-                          <td><a href="javascript:hanClick('上野国 館林藩');">上野国 館林藩</a></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('下野国 佐野藩');">下野国 佐野藩</a></td>
-                          <td><a href="javascript:hanClick('下野国 壬生藩');">下野国 壬生藩</a></td>
-                          <td><a href="javascript:hanClick('下野国 宇都宮藩');">下野国 宇都宮藩</a></td>
-                          <td><a href="javascript:hanClick('常陸国 土浦藩');">常陸国 土浦藩</a></td>
-                        </tr>
-                        <tr>
-                          <td><a href="javascript:hanClick('出羽国 山形藩');">出羽国 山形藩</a></td>
-                          <td><a href="javascript:hanClick('陸奥国 棚倉藩');">陸奥国 棚倉藩</a></td>
-                          <td><a href="javascript:hanClick('陸奥国 会津藩');">陸奥国 会津藩</a></td>
-                          <td><a href="javascript:hanClick('陸奥国 湯長谷藩');">陸奥国 湯長谷藩</a></td>
-                          
-                        </tr>                     
-                      </tbody>
-                      </table>
-                    </details>
-                  </li>
-                  <li>
-                    <a href="javascript:hanClick('ALL');">全村再表示</a>
+  <body >
+    <div class="a">
+        <header class="header">
+            <h1>江戸後期の藩の地図を作る</h1>
+            <nav class="h-nav">
+                <ul class="b">
+                    <li><a href="Kansai_Map.html">関西藩地図を見る</a></li>
+                    <li><a href="Hyougo_Map.html">兵庫藩地図を見る</a></li>
+                    <li><a href="#explanation">地図の作り方について</a></li>
+                </ul>
+            </nav>  
+        </header>
+          <p>江戸時代の地図はないので、明治初期の村がどの藩の領地だったかがまとめられている「旧高旧領取調帳」をもとに藩の領地がわかる地図を作ってみる。
+      </p><p>「旧高旧領取調帳」は 国立歴史民俗博物館が公開しているデータベースを利用し、次の２つの方法で地図を作った。</p>
+        
+          
+ 
+        <div class="c">
+        <main class="main">
+          <ul style="list-style: none;text-align: left;">
+          <li ><strong>関西藩地図</strong>：大正9年の地図から作成
+            <ul style=" list-style: none;">
+              <li>
+                村の領域がわかる一番古い大正９年の地図を使い、大正９年の村と明治初期の村の対応づけをし大正９年の地図から藩地図を作る
+              </li>
+            </ul>
+          </li>
+          </ul>
+            <a href="Kansai_Map.html"><img src="../static/images/関西藩地図.png"  alt="関西藩地図"></a>
+        </main>
+        <aside class="side">
+          <ul style="list-style: none;text-align: left;">
+          <li ><strong>兵庫藩地図</strong>：現在の地図から作成
+            <ul style="list-style: none;">
+              <li>
+                明治初期の村の位置がおおよそわかる資料から現在の地名（町丁字）と明治の村の対応を仮定し、現在の地図から明治初期の村・藩地図を作る
+               </li>
+            </ul>
+          </li>
+        </ul>
+            <a href="Hyougo_Map.html"><img src="../static/images/兵庫藩地図.png"  alt="兵庫藩地図"></a>
+        </aside>
+        </div>
+        <div class="kaisetsu">
+      <div id="explanation" style="height: 90px;"></div>
+      <h3 style="background-color: aqua;">地図の作り方について</h3>
+      </div>
+      <div class="box1">
+      <h3>大正９年の地図から作成</H3>
+        以下の手順で地図を作成した。
+      <ol style="text-align: left;">
+          <li >「旧高旧領取調帳」から明治初期の村の領地を調べる</li>
+          <li >明治初期の村と大正9年の村の対応を調べる（Wikipedia）</li>
+          <li >大正9年の地図を使って藩別に領地を色分け</li>
+      </ol>
+      <p><br></P>
+      <p>
+      <ol >
+          <li >「旧高旧領取調帳」から明治初期の村の領地を調べる
+            <ul style="list-style: none;">
+              <li>
+                <div >
+                  <img style="width:60%"     src="../static/images/旧国旧領石高調査帳.png"  alt="旧国旧領石高調査帳">
+                </div>
+                郡単位に村名と領地を把握
+              </li>
+            </ul>
+          </li>
+          <li >明治初期の村と大正9年の村の対応を調べる（Wikipedia）
+            <ul style="list-style: none;">
+              <li>Wikipediaで郡単位に調べれば、その郡内の村の現在までの変遷がわかるので、明治初期の村と大正９年の村の対応がわかる
+                <div> <img style="width:80%"     src="../static/images/加東郡Wiki.png"  alt="加東郡Wiki">
+                </div>
+                加東郡の上久米村、下久米村、久米村、廻淵村、畑村、池之内村（現・加東市）は明治２２年に加東郡米田村に統合され、大正９年時点では加東郡米田村になっている
+              </li>
+              </ul>
+          </li>
+          <li >大正9年の地図を使って藩別に領地を色分け
+                <ul style="list-style: none;">
+                  <li style="list-style: none;">
+                    <table style="margin: auto;">
+                      <tr>
+                         <td valign="top" width="40%">米田村には、三草藩、姫路藩、浜松藩、幕府、旗本知行地、寺社の領地が存在する<br>
+                          藩別に色分けする場合は、石高の一番多い藩として色分けする（米田村は、三草藩とする）</td>
+                        <td style="margin-bottom:0 ;text-align: start;">
+                          <img style="margin: 0;" src="../static/images/米田村石高表.png"  alt="米田村石高表">
+                      </td>
+                     
+                    </tr></table>
+                    
                   </li>
                 </ul>
-              </li>
-              <li ><a href="#dataDiv"> 領地一覧  </a></li>
-              <li ><a href="Hyougo_Map.html">兵庫県藩地図</a></li>
-              <li><a href="Explanation.html"> 解説  </a></li>
-            </ul>
-          </header>
-        </div>
-        <div id='mapcanvas0' style='margin: 0; z-index: 0;border:solid; border-width:1px ; position: absolute'></div>
-        <div id='mapcanvas1' style='z-index: 0;border:solid; border-width:1px ; position: absolute'></div>
-        <div id='notebox' style='position: absolute'> </div>
-      </div>
-      <div id="dataDiv" ></div> 
-      <div class="dataheader">
-           <!-- <nav style="justify-content: start;padding-top: 100px;background-color: rgb(128, 224, 248);">-->
-            <nav style="justify-content: start;padding-top: 10px;">
-                  <div style="font-weight: bold;border-right:0px;width:200px">【<label id="dispVilName" >全</label> 町村一覧】</div>
-          </nav>
-          <!--<div class="dataheader">-->
-            <nav class="subnav" >
-              <ul style="display: flex; list-style:none">
-                <li style="width: 200px;"><label id="VilCount" >全村</label>
-              <!--  <li  class="pmenu" style="border-top: 1px solid rgb(241, 41, 15)">項目名 <select name="selObj" id="selObj"></select>x
-                <li  ontouchstart="">検索
-                          <input  class="inputtext" type="input" id="selText" name="selecttext" value="" required; style="width:10em">-->
-                </li>
-                <li><a href="#pageTop">地図に戻る</a></li>
+            </li>
+         </ol>
+         大正9年の地図の村を藩別に色分けした結果
+         <div> <img  src="../static/images/大正9年米田村付近.png"  alt="大正9年地図抜粋">
+                      </div>
+      <br>
+      </p> 
+      <p>
+      このように村の領地は想像以上に複雑で、１村が１つの藩に所属したわけではなく複数の藩の領地が入組んでいた。<br>
+      特に山城国（現 京都府）の多数の領地が入組んだ複雑な状況についての論文が、     
+      <a href="https://doshisha.repo.nii.ac.jp/records/18199/file_details/kj00000129508.pdf?filename=kj00000129508.pdf&file_order=0">同志社大学学術リポジトリの「江戸時代における公家領の支配構造」</a>として公開されている。</small>
+
+      <p>
+      【複数の領地が存在する村への対応】
+        <p>
+          一つの村に複数の領地が存在する場合、代表の藩で色塗りしてしまうとそれ以外の藩の存在がわからなくなってしまう。
+          この問題に対処するために、藩ごとにその藩の領地が存在するすべての村を表示する機能も作った。</p>
+            <P>
+               例：淀藩の領地を表示する
+            <div >
+              <img style="width:60%" src="../static/images/藩別色データ.png" >
+              <br>
+              <img style="width:50%" src="../static/images/藩別色塗り.png" >
+            </div>
+            <br>
+            複数の藩の領地が存在する村とそうでない村が区別できるように、村の石高に占めるその藩の石高の割合で塗色を変えている。
+          
+            </p>
+      </p>     
+      
+      <P>参考：データ量
+      <ul style="list-style: none;">
+        <li >「旧高旧領取調帳」
+        <ul style="list-style: none;">
+        <li>関西は但馬国、播磨国、淡路国、丹波国、丹後国、摂津国、山城国、河内国、和泉国、大和国、紀伊国、近江国が対象。
+        　　<br><a href="https://www.rekihaku.ac.jp/up-cgi/login.pl?p=param/kyud/db_param">国立歴史民俗博物館よりダウンロード</a>したデータは、 約16,800行 </li>
+        </ul>
+        <li >大正９年地図</li>
+        <ul style="list-style: none;">
+        <li ><a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v2_3.html">国土交通省 国土数値情報ダウンロードサイト「行政区域データ」</a>近畿 ２府４県の大正９年のデータを使用。市町村（地物）の数は1963。</li>
+        </ul>
+        </ul>
+      <br>
+    </div>
+    <div class="box2" style="margin:auto; ">
+     <h3>現在の地図から作成</H3>
+              <p>下図の大正9年の加東郡米田村の領域の地図を見てみると、地名に明治時代の名残があることがわかる。<br>
+                </p>
+            <div >
+              <img src="../static/images/加東郡米田村.png"  alt="加東郡米田村">
+            </div>
+            以下の方法で大正9年の地図を利用するよりも細かな藩地図が作れると考えた。
+              <ul>
+                <li>地名（町丁・字）の境界がわかる地図を用意する</ll>
+                <li>地名（町丁・字）と明治初期の村を対応づける</li>
+                <li>同じ村に対応付けた地名（町丁・字）の領域を結合して村の領域を決め、藩別に色分けする</li>
               </ul>
-            </nav>
-      </div>
-       <!-- ***** 動的に作成されるデータ一覧表の部分-->
-      <div id="table" >              
-      </div> 
+            </p>
+            <div >
+              <p>
+              <ol>
+                <li>地名（町丁・字）の境界がわかる地図を用意する</ll>
+                 　<p>
+                      <a href="https://www.e-stat.go.jp/gis/statmap-search?page=1&type=2&aggregateUnitForBoundary=A&toukeiCode=00200521&toukeiYear=2000&serveyId=A002005212000&datum=2000">e-Stat 統計地理情報システム/境界データダウンロード</a>に、小地域（町丁・字等）の境界データが公開されている。
+                      この地図データは、市町村の地名（町丁・字）毎の境界データがまとまっている。
+                    </p>  
+                    <p>
+                    古い地図ほど昔の地名が残っている可能性が高いので、平成の大合併の前の2000年のデータを使用する。
+                    <br>市町村の地名（町丁・字）毎の境界データがまとまっている。
+                    例：大正9年の加東郡米田村（現 社町）付近の抜粋
+                    <div> <img  src="../static/images/社町字.png"  alt="社町字"></div>
+                  </p>
+                <li>地名（町丁・字）と明治初期の村を対応づける（単純な例）</li>
+                
+                「旧高旧領取調帳」の大正9年の加東郡米田村に該当する部分
+                        <div> <img  src="../static/images/米田村石高表.png"  alt="米田村石高表"></div>
+                 <br>「旧高旧領取調帳」記載されている６村は地名として残っている。<br>
+                 <p>
+                 ２０００年の地図の地名（町丁・字）の境界を６村の境界と仮定し旧領名の種類で色分けした地図を作る。
+                 <div> <img  src="../static/images/加東郡米田村字２.png"  alt="米田村地図"></div>
+                 
+                 大正9年の地図から作成した藩地図に比べ藩の境界がより細かく表現できている。
+                 </p>                
+                <li>地名（町丁・字）と明治初期の村を対応づける（対応が困難な例）</li>
+
+                都市部では再開発や区画整理などで昔の地名の名残は残っていない地域が多い。
+                <p>大正9年時点の武庫郡西灘村（現 神戸市灘区）辺りの地図を見ると、一部の地名に村名の名残はあるが対応付けは困難。</p>
+                「旧高旧領取調帳」の西灘村に該当する部分
+                <div> <img  src="../static/images/西灘村石高表.png"  alt="西灘村石高表"></div>
+                きれいに区画整理され町丁が細かく分かれていて単純に対応づけするのが困難。
+                <div> <img  src="../static/images/西灘村全体図.png"  alt="西灘村地図"></div>
+                <div> <img  src="../static/images/西灘村.png"  alt="西灘村地図"></div>
+                
+                 <p>
+                  昔の村が現在の地名のどこにあたるのかをまとめた資料が<a href="https://geoshape.ex.nii.ac.jp/nrct/">ROIS-DS人文学オープンデータ共同利用センター (CODH)</a>で公開されている。 
+                  <br>このデータを使い、明治初期の村と現在の地名の対応付けを行う。
+                   <div> <img  src="../static/images/西灘村歴史地名項目セット.png"  alt="西灘村歴史地名項目セット"></div>
+                 </p>
+                 <p>
+                   赤字の地名は複数の村で重複しており村の境界を正確に決定できないが、地理的な連続性などを考慮して適当に振り分ける。
+                   また、データでは不明な村についてどの藩の領地がわかる場合は村名は不明のままとした。
+                    <div> <img  src="../static/images/西灘村町丁村対応例.png"  alt="西灘村対応表"></div>
+                  </p>
+                   <li>同じ村に対応付けた地名（町丁・字）の領域を結合して村の領域を決め、藩別に色分けする</li>
+                  <p>
+                  GISソフト（QGIS）を使用して同一村に対応付けられた地名（町丁・字）を結合し、村の境界の地図を作る。
+                  <div> <img  src="../static/images/西灘村の明治再現.png"  alt="西灘村付近の明治初期再現１"></div> 
+                  </p>
+                  <p>
+                  上図の実線部分を抽出、藩別に色塗りをし藩の領地がわかりやすくした藩地図を作る     
+                 <div> <img  src="../static/images/西灘村完成図.png"  alt="西灘村付近の明治初期再現２"></div> 
+                  </p>
+                 <p>
+                  「旧高旧領取調帳」記載の村を地名（町丁・字）と対応付けるのは大変な手間がかかるので、兵庫県の旧５国（但馬、丹波、播磨、摂津、淡路）の村を対象にして地図を作成
+                 <img src="../static/images/兵庫藩地図.png"  alt="兵庫藩地図">
+                </p>
+                <p>
+                  大正９年の地図から作成した時と同じように
+                  <ul >
+                    <li> 複数の領地が入組んだ村は、石高が一番高い藩の領地として色塗り</li>
+                    <li> 他の藩の領地の存在もわかるように、藩別に全ての領地（村）を表示する機能を用意</li>
+                  </ul>
+                  の２種類を用意した。
+                </p>
+                
+              </ol>
+              </p>
+              
+          </div>        
+        </div>
+  </div>
   </body>
-  <script>
-  function mapinitialize(){
-
-   initialize()
-    
-    var readdata = "";
-    var query = window.location.search;
-    var value = query.split('=');
-    var HanName=""
-    if (value[0]=="?han"){
-      HanName = decodeURIComponent(value[1])
-    }
-    
-    selectElm = document.getElementById("dataitem0:0")
-    selectOptions = selectElm.options
-
-    for (let i = 0 ; i < selectOptions.length ; i++){
-      if (selectOptions[i].innerHTML == HanName){
-        selectOptions[i].setAttribute("selected", true);
-      }
-    }
-//    let e = new Event('onchange');
-//    selectOptions.dispatchEvent(e);
-   // changeDataItem(0,0,false)
-   selectElm.onchange()
-
-   makeTable()
-
-    }
-function hanClick(HanName){
- var readdata = "";
-  if (HanName =="ALL"){
-    HanName = "旧国名"
-  }
-
- selectElm = document.getElementById("dataitem0:0")
- selectOptions = selectElm.options
-
- for (let i = 0 ; i < selectOptions.length ; i++){
-   if (selectOptions[i].innerHTML == HanName){
-   // console.log(HanName+":"+i+":"+selectOptions[i].innerHTML)
-    selectOptions[i].selected = true
-    //selectOptions[i].setAttribute("selected", true);
-   }
- }
- //   let e = new Event('onchange');
- //   selectElm.dispatchEvent(e);
-  changeDataItem(0,0,false)
-  selectElm.onchange()
-
-  if(HanName =="旧国名"){
-    makeTable();
-  }else {
-    spt = HanName.split(" ")
-    makeHanTable(spt[spt.length -1]) 
-  }
-
- }
-  </script>
-</html>
